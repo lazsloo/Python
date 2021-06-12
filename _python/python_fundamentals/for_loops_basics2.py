@@ -14,8 +14,14 @@ print(biggie_size([-1, 3, 5, -5]))
 # Example: count_positives([-1,1,1,1]) changes the original list to [-1,1,1,3] and returns it
 # Example: count_positives([1,6,-4,-2,-7,-2]) changes the list to [1,6,-4,-2,-7,2] and returns it
 
-# def count_positives(positive):
-#     if positive[]
+def count_positives(lst):
+    count = 0
+    for val in lst:
+        if val > 0:
+            count += 1
+    lst[len(lst) - 1] = count
+    return lst
+print(count_positives([-1, 1, 1, 1])
 
 # Sum Total - Create a function that takes a list and returns the sum of all the values in the array.
 
@@ -47,7 +53,10 @@ print(average([1, 2, 3, 4]))
 # Example: length([]) should return 0
 
 def length(a):
-    return len(a)
+    count = 0
+    for i in a:
+        count += 1
+    return count
 print(length([1, 2, 3, 4]))
 
 
@@ -64,6 +73,7 @@ def minimum(a):
             current_min = i
     return current_min
 print(minimum([37, 2, 1, -9, 2, 1]))
+print(minimum([]))
 
 # Maximum - Create a function that takes a list and returns the maximum value in the array. If the list is empty, have the function return False.
 
@@ -85,3 +95,44 @@ print(maxium([]))
 
 # Example: ultimate_analysis([37,2,1,-9]) should return {'sumTotal': 31, 'average': 7.75, 'minimum': -9, 'maximum': 37, 'length': 4 }
 
+def ultimate_analysis(lst):
+    result = {
+        'sum_total': None,
+        'maximum': None,
+        'minimum': None,
+        'average': None,
+        'length': 0
+    }
+    if len(lst) == 0:
+        return result
+    else:
+        result['sum_total'] = 0
+        result['maximum'] = lst[0]
+        result['minimum'] = lst[0]
+    
+    for val in lst:
+        if val > result['maximum']:
+            result['maximum'] = val
+        elif val < result['minimum']:
+            result['minimum'] = val
+
+        result['sum_total'] += val
+        result['length'] += 1
+    result['average'] = result['sum_total'] / len(lst)
+
+    return result
+
+print(ultimate_analysis([37, 2, 1, -9]))
+print(ultimate_analysis([]))
+
+# Reverse List - Create a function that takes a list and return that list with values reversed. Do this without creating a second list. (This challenge is known to appear during basic technical interviews.)
+
+# Example: reverse_list([37,2,1,-9]) should return [-9,1,2,37]
+
+def reverse_list(lst):
+    half_len = int(len(lst) / 2)
+    for i in range(half_len):
+        lst[i] , lst[len(lst) - 1 - i] = lst[len(lst) - 1 - i], lst[i]
+    return lst
+
+print(reverse_list([37, 2, 1, -9]))
