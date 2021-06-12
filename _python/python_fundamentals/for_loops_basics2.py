@@ -21,7 +21,7 @@ def count_positives(lst):
             count += 1
     lst[len(lst) - 1] = count
     return lst
-print(count_positives([-1, 1, 1, 1])
+print(count_positives([-1, 1, 1, 1]))
 
 # Sum Total - Create a function that takes a list and returns the sum of all the values in the array.
 
