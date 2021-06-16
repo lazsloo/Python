@@ -25,7 +25,8 @@ class BankAccount:
     #     return self
 
     def yield_interest(self):
-        self.bal = self.bal * (1 + self.rate)
+        if self.bal > 0:
+            self.bal = self.bal * (1 + self.rate)
         return self
 
 bank_of_fail = BankAccount(0.01, 0)
