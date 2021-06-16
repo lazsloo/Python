@@ -15,8 +15,10 @@ class User:
         print(f"{self.name}, balance is: {self.account_balance}")
 
     def transfer_money(self, other_user, amount):
+        print(f"{other_user.name} current balance is: {other_user.account_balance}")
         self.account_balance -= amount
         other_user.account_balance += amount
+        print(f"{self.name} transfered {amount} to {other_user.name} current balance is: {other_user.account_balance}")
 
 matt = User("Matt Damon")
 matt.make_deposit(100)
@@ -24,12 +26,6 @@ matt.make_deposit(7234.11)
 matt.make_deposit(233.12)
 matt.make_withdrawl(3054.22)
 matt.display_user_balance()
-
-ben = User("Will Smith")
-matt.transfer_money(ben, 100)
-matt.display_user_balance()
-ben.make_withdrawl(100)
-ben.display_user_balance()
 
 mark = User("Mark Walhberg")
 mark.make_deposit(100.24)
@@ -43,4 +39,6 @@ ben.make_deposit(1000)
 ben.make_withdrawl(50)
 ben.make_withdrawl(50)
 ben.make_withdrawl(50)
+matt.transfer_money(ben, 100)
 ben.display_user_balance()
+matt.display_user_balance()
