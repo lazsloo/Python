@@ -18,7 +18,6 @@ class User:
         self.account_balance -= amount
         other_user.account_balance += amount
 
-
 matt = User("Matt Damon")
 matt.make_deposit(100)
 matt.make_deposit(7234.11)
