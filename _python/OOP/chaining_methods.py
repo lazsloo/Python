@@ -23,8 +23,9 @@ class User:
 
 
 matt = User("Matt Damon")
-matt.make_deposit(100).make_deposit(7234.11).make_deposit(233.12).make_withdrawl(3054.22).display_user_balance()
-# matt.transfer_money("ben", 100)
+ben = User("Will Smith")
+matt.make_deposit(100).make_deposit(7234.11).make_deposit(233.12).make_withdrawl(3054.22).display_user_balance().transfer_money(ben, 100)
+ben.make_withdrawl(100).display_user_balance()
 
 mark = User("Mark Walhberg")
 mark.make_deposit(100.24).make_deposit(1314.12).make_withdrawl(123.99).make_withdrawl(73).display_user_balance()
