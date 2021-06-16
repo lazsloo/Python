@@ -1,5 +1,5 @@
 class BankAccount:
-    def __init__(self, int_rate, balance):
+    def __init__(self, int_rate=0, balance=0):
         self.rate = int_rate
         self.bal = balance
     
@@ -20,9 +20,12 @@ class BankAccount:
         print(f"Balance: {self.bal}")
         return self
 
+    # def yield_interest(self):
+    #     self.bal = self.bal + self.bal * self.rate
+    #     return self
+
     def yield_interest(self):
-        amount = int(self.rate * self.bal)
-        self.bal = amount
+        self.bal = self.bal * (1 + self.rate)
         return self
 
 bank_of_fail = BankAccount(0.01, 0)
