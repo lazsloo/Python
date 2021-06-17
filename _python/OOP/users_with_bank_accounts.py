@@ -1,7 +1,7 @@
 class User:
     def __init__(self, users):
         self.name = users
-        self.account = BankAccount(int_rate = 0.01, balance = 0)
+        self.account = BankAccount(int_rate = 0.02, balance = 0)
 
     def make_deposit(self, amount):
         self.account.deposit(amount)
@@ -14,6 +14,10 @@ class User:
     def display_user_balance(self):
         self.account.display_account_info()
         # print(f"{self.name}, balance is: {self.account}")
+        return self
+
+    def intrest(self):
+        self.account.yield_interest()
         return self
 
     # def transfer_money(self, other_user, amount):
@@ -42,7 +46,7 @@ class BankAccount:
 
     def display_account_info(self):
         if self.balance > 0:
-            print(f"Your current balance is: ${self.balance}")
+            print(f"Your current balance is: ${self.balance}. Don't let the wifey see this")
         else:
             print(f"Bro you're ${self.balance} stop drinking beah at tha bah or mar will kills yah")
         return self
@@ -54,8 +58,9 @@ class BankAccount:
     def yield_interest(self):
         if self.balance > 0:
             self.balance = self.balance * (1 + self.int_rate)
+            print(f"Your intrest rate is: {self.int_rate}. Smaht guy trying to retire. What? you think yous betteh than me?")
         return self
 
 matt = User("Matt Damon")
 
-matt.make_deposit(100).make_deposit(400).make_withdrawl(5000).display_user_balance()
+matt.make_deposit(100).make_deposit(400).make_withdrawl(200).intrest().display_user_balance()
