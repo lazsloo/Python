@@ -1,5 +1,27 @@
+class User:
+    def __init__(self, users):
+        self.name = users
+        self.account = BankAccount(int_rate = 0.01, balance = 0)
+
+    def make_deposit(self, amount):
+        self.account.deposit(amount)
+        return self
+
+    def make_withdrawl(self, amount):
+        self.account.withdraw(amount)
+        return self
+
+    def display_user_balance(self):
+        self.account.display_account_info()
+        # print(f"{self.name}, balance is: {self.account}")
+        return self
+
+    # def transfer_money(self, other_user, amount):
+    #     self.account -= amount
+    #     other_user.account += amount
+
 class BankAccount:
-    def __init__(self, int_rate, balance):
+    def __init__(self, int_rate = 0.01, balance = 0):
         self.int_rate = int_rate
         self.balance = balance
     
@@ -29,8 +51,6 @@ class BankAccount:
             self.balance = self.balance * (1 + self.int_rate)
         return self
 
-bank_of_fail = BankAccount(0.01, 0)
-bank_of_fail.deposit(200).deposit(150).deposit(50).withdraw(100).yield_interest().display_account_info()
+matt = User("Matt Damon")
 
-bank_of_love = BankAccount(0.01, 0)
-bank_of_love.deposit(1500).deposit(1500).withdraw(200).withdraw(150).withdraw(300).withdraw(50).yield_interest().display_account_info()
+matt.make_deposit(100).make_deposit(400).make_withdrawl(10000).display_user_balance()
