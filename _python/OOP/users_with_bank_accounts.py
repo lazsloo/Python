@@ -27,11 +27,13 @@ class BankAccount:
     
     def deposit(self, amount):
         self.balance += amount
+        print(f"${amount} was deposited for ma beah money")
         return self
 
     def withdraw(self, amount):
         if self.balance >= amount:
             self.balance -= amount
+            print(f"${amount} was withdrawn, don't spend it on drugs")
         else:
             print("Insufficent funds: Charging $5 fee")
             self.balance -= 5
@@ -39,7 +41,10 @@ class BankAccount:
         return self
 
     def display_account_info(self):
-        print(f"Balance: {self.balance}")
+        if self.balance > 0:
+            print(f"Your current balance is: ${self.balance}")
+        else:
+            print(f"Bro you're ${self.balance} stop drinking beah at tha bah or mar will kills yah")
         return self
 
     # def yield_interest(self):
@@ -53,4 +58,4 @@ class BankAccount:
 
 matt = User("Matt Damon")
 
-matt.make_deposit(100).make_deposit(400).make_withdrawl(10000).display_user_balance()
+matt.make_deposit(100).make_deposit(400).make_withdrawl(5000).display_user_balance()
