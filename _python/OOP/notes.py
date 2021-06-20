@@ -48,3 +48,54 @@ monty.make_deposit(50)
 guido.make_withdrawl(2)
 print(f"{guido.name} account balance is: {guido.account_balance} wow boy you broke")	# output: 300
 print(f"{monty.name} account balance is: {monty.account_balance} damn and I thought {guido.name} was broke but DAMN! you broker then a mutha fucka")	# output: 50c
+
+def varargs(arg1, *args):
+    print("Got ", arg1, " and ", args)
+varargs("one") 			# output: Got one and ()
+varargs("one", "two") # output: Got one and ('two',)
+varargs("one", "two", "three", "four", "five", "six") # output: Got one and ('two', 'three')
+
+def varargs(arg1, *args):
+    for a in args:
+        print(a)
+varargs("one", "two", "three") # output: two, three (on separate lines)
+
+class SLNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+class SList:
+    def __init__(self):
+        self.head = None
+
+my_list = SList()
+
+class Parent:
+    def method_a(self):
+        print("invoking PARENT method_a!")
+class Child(Parent):
+    def method_a(self):
+        print("invoking CHILD method_a!")
+dad = Parent()
+son = Child()
+dad.method_a()
+son.method_a() #notice this overrides the Parent method!
+
+# We'll use the Person class to demonstrate polymorphism
+# in which multiple classes inherit from the same class but behave in different ways
+class Person:
+    def pay_bill(self):
+        raise NotImplementedError
+# Millionaire inherits from Person
+class Millionaire(Person):
+    def pay_bill(self):
+        print("Here you go! Keep the change!")
+# Grad Student also inherits from the Person class
+class GradStudent(Person):
+    def pay_bill(self):
+        print("Can I owe you ten bucks or do the dishes?")
+b = Millionaire()
+c = GradStudent()
+b.pay_bill()
+c.pay_bill()
