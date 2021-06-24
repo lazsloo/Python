@@ -1,0 +1,16 @@
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    border: solid;
+    padding: 20px;
+}
+
+#time {
+    border: solid;
+    padding: 20px;
+    font-size: 80px;
+}
