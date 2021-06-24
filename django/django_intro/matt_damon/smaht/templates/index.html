@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wassup Brah</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/sytle.css' %}">
+</head>
+<body>
+        <p>Hey brah i'm back foh some mohe beah</p>
+        <p>{{name}}</p>
+        <p>{{whateverIWant}}</p>
+        {% for language in languages %}
+            <p>{{language}}</p>
+        {% endfor %}
+</body>
+</html> 
