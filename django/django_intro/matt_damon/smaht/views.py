@@ -9,3 +9,4 @@ def index(request):
         "languages": ["Python", "Java", "Potato"]
     }
     return render(request, "index.html", context)
+    
