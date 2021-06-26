@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +8,30 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-    <form action="create_user" method="POST">
-        {% csrf_token %}
-        <div>Your Name: <input name="first_name" type="text"></div>
-        <div>Dojo Location: <select name="locations" id="locations">
-            <option value="Boston">Boston</option>
-            <option value="Not Boston">Not Boston</option>
-            <option value="Still not Bosoton">Still not Boston
-            </option>
-            <option value="Get the fuck out">Get the fuck out</option>
-        </select>
-        </div>
-        <div>Favorite Language: <select name='language' id='language'>
-            <option value="English">English</option>
-            <option value='What are you saying bro'>What are you saying bro</option>
-        </select>
-        </div>
-        <p>Comment (Optional):</p>
-        <textarea rows="4" cols="20" name="comment"></textarea>
-        <button type="submit">Create User</button>
-    </form>
+    <div id=wrapper>
+        <form action="create_user" method="POST">
+            {% csrf_token %}
+            <div>Your Name: <input name="first_name" type="text"></div>
+            <div>Dojo Location: <select name="locations" id="locations">
+                    <option value="Boston">Boston</option>
+                    <option value="Not Boston">Not Boston</option>
+                    <option value="Still not Bosoton">Still not Boston
+                    </option>
+                    <option value="Get the fuck out">Get the fuck out</option>
+                </select>
+            </div>
+            <div>Favorite Language: <select name='language' id='language'>
+                    <option value="English">English</option>
+                    <option value='What are you saying bro'>What are you saying bro</option>
+                </select>
+            </div>
+            <p>Comment (Optional):</p>
+            <textarea rows="4" cols="20" name="comment"></textarea>
+            <button type="submit">Create User</button>
+        </form>
+    </div>
 </body>
+
 </html>
