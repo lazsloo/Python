@@ -10,10 +10,11 @@
 </head>
 
 <body>
-    <div>First Name: {{ first_name }}</div>
-    <div>Location: {{ locations }}</div>
-    <div>Favorite Language: {{ language }}</div>
-    <div>Comment: {{ comment }}</div>
+    <h2>Welcome bro, i love you</h2>
+    <div>First Name: {{request.session.first_name}}</div>
+    <div>Location: {{request.session.locations}}</div>
+    <div>Favorite Language: {{request.session.language}}</div>
+    <div>Comment: {{request.session.comment}}</div>
 </body>
 
 </html>

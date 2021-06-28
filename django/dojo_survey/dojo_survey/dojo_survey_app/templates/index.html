@@ -13,6 +13,7 @@
     <div id=wrapper>
         <form action="create_user" method="POST">
             {% csrf_token %}
+            <h2>Your cousin... from Boston</h2>
             <div>Your Name: <input name="first_name" type="text"></div>
             <div>Dojo Location: <select name="locations" id="locations">
                     <option value="Boston">Boston</option>
