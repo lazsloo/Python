@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deez Nuts</title>
+</head>
+
+<body>
+    <h2>All users muta trucker</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.name }}</th>
+            <th>{{ user.email }}</th>
+            <th>{{ user.age }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="/add" method="POST">
+        {% csrf_token %}
+        <p>Name: <input name="name" type="text"></p>
+        <p>Email <input name="email" type="text"></p>
+        <p>Age <input name="age" type="text"></p>
+        <button type="submit">Add</button>
+    </form>
+</body>
+
+</html>
