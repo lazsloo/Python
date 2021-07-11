@@ -1,7 +1,15 @@
-h2 {
-    color: blue;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-table {
-    border: solid;
+#wrapper {
+    width: 970px;
+    display: inline-block;
+    text-align: center;
+}
+
+#table {
+    display: inline-block;
+    text-align: center;
 }

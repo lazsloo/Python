@@ -18,5 +18,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('add', views.add),
+    path('users', views.users),
+    path('users/edit/<int:user_id>', views.edit),
 ]

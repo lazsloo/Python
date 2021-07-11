@@ -11,30 +11,39 @@
 </head>
 
 <body>
-    <h2>All users muta trucker</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Age</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <th>{{ user.id }}</th>
-            <th>{{ user.name }}</th>
-            <th>{{ user.email }}</th>
-            <th>{{ user.age }}</th>
-        </tr>
-        {% endfor %}
-    </table>
-    <form action="/add" method="POST">
-        {% csrf_token %}
-        <p>Name: <input name="name" type="text"></p>
-        <p>Email <input name="email" type="text"></p>
-        <p>Age <input name="age" type="text"></p>
-        <button type="submit">Add</button>
-    </form>
+    <div id="wrapper">
+        <h2>All users muta trucker</h2>
+        <div id="table">
+            <table>
+                <tr>
+                    <th>ID:</th>
+                    <th>Name:</th>
+                    <th>Email:</th>
+                    <th>Age:</th>
+                    <th>Actions:</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <th>{{ user.id }}</th>
+                    <th>{{ user.name }}</th>
+                    <th>{{ user.email }}</th>
+                    <th>{{ user.age }}</th>
+                    <th><a href="/users/edit/{{user.id}}">Edit</a></th>
+                    <th><a href="/users/delete/{{user.id}}/">Delete</a></th>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div id="form">
+            <form action="/users" method="POST">
+                {% csrf_token %}
+                <p>Name: <input name="name" type="text"></p>
+                <p>Email: <input name="email" type="text"></p>
+                <p>Age: <input name="age" type="number"></p>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
