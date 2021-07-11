@@ -29,6 +29,6 @@ def add_ninja(request):
 
 def delete(request, dojo_id):
     dojoDelete = dojo.objects.get(id=dojo_id)
-    if (request.method=="POST"):
+    if (request.method=="GET"):
         dojoDelete.delete()
     return redirect("/")
