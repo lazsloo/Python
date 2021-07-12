@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+<body>
+    <h1>Edit Show {{updateShow.id}}</h1>
+    <form action="/shows/{{updateShow.id}}/edit" method="POST">
+        {%csrf_token%}
+        <p>Title:</p>
+        <input name="title" value="{{updateShow.title}}" type="text">
+        <p>Network:</p>
+        <input name="network" value="{{updateShow.network}}" type="text">
+        <p>Release Date:</p>
+        <input name="release" value="{{updateShow.release|date:'Y-m-d'}}" type="date">
+        <!-- updateShow.release|date:'Y-m-d' Will show the hard coded date in the form -->
+        <p>Description:</p>
+        <input name="desc" value="{{updateShow.desc}}" type="text">
+        <button type="submit">Update</button>
+    </form>
+    <a href="/shows/{{updateShow.id}}">Go to Show</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read(One)</title>
+</head>
+<body>
+    <a href="/shows">Go Back</a>
+    <h1>TV Show {{tvShow.id}}</h1>
+    <p>Title: {{tvShow.title}}</p>
+    <p>Network: {{tvShow.network}}</p>
+    <p>Release Date: {{tvShow.release}}</p>
+    <p>Description: {{tvShow.desc}}</p>
+    <p>Last Updated: {{tvShow.update_at}}</p>
+    <a href="/shows/{{tvShow.id}}/edit">Edit</a>
+    <a href="/shows/{{tvShow.id}}/destroy">Delete</a>
+</body>
+</html>
