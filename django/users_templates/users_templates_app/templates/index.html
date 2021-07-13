@@ -5,45 +5,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Deez Nuts</title>
 </head>
 
 <body>
-    <div id="wrapper">
-        <h2>All users muta trucker</h2>
-        <div id="table">
-            <table>
-                <tr>
-                    <th>ID:</th>
-                    <th>Name:</th>
-                    <th>Email:</th>
-                    <th>Age:</th>
-                    <th>Actions:</th>
-                </tr>
-                {% for user in users %}
-                <tr>
-                    <th>{{ user.id }}</th>
-                    <th>{{ user.name }}</th>
-                    <th>{{ user.email }}</th>
-                    <th>{{ user.age }}</th>
-                    <th><a href="/users/edit/{{user.id}}">Edit</a></th>
-                    <th><a href="/users/delete/{{user.id}}/">Delete</a></th>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-        <div id="form">
-            <form action="/users" method="POST">
-                {% csrf_token %}
-                <p>Name: <input name="name" type="text"></p>
-                <p>Email: <input name="email" type="text"></p>
-                <p>Age: <input name="age" type="number"></p>
-                <button type="submit">Add</button>
-            </form>
-        </div>
-    </div>
+    <h2>All users muta trucker</h2>
+    <table>
+        <tr>
+            <th>ID:</th>
+            <th>Name:</th>
+            <th>Email:</th>
+            <th>Age:</th>
+            <th>Actions:</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.name }}</th>
+            <th>{{ user.email }}</th>
+            <th>{{ user.age }}</th>
+            <th><a href="/users/edit/{{user.id}}">Edit</a></th>
+            <th><a href="/users/delete/{{user.id}}/">Delete</a></th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {%if message.tags %} class="{{ messages.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/users" method="POST">
+        {% csrf_token %}
+        <p>Name: <input name="name" type="text"></p>
+        <p>Email: <input name="email" type="email"></p>
+        <p>Age: <input name="age" type="number"></p>
+        <button type="submit">Add</button>
+    </form>
 </body>
 
 </html>

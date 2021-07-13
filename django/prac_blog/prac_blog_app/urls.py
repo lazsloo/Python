@@ -1,4 +1,4 @@
-"""tv_app URL Configuration
+"""prac_blog_app URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -17,12 +17,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.all_shows),
-    path('shows/', views.all_shows),
-    path('shows/new', views.new_show),
-    path('shows/create', views.create_show),
-    path('shows/<int:tv_id>', views.view_show),
-    path('shows/<int:update_id>/edit', views.get_show),
-    path('shows/<int:update_id>/update', views.update_show),
-    path('shows/<int:delete_id>/destroy', views.delete_show)
+    path('', views.update)
 ]

@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from .models import user
 
 # Create your views here.
@@ -8,7 +9,24 @@ def index(request):
     }
     return render(request, "index.html", context)
 
-def users(request):
+# def users(request):
+#     if (request.method == "POST"):
+#         user.objects.create(
+#             name=request.POST['name'],
+#             email=request.POST['email'],
+#             age=request.POST['age']
+#         )
+#     return redirect("/")
+
+def new_user(request):
+
+    errors = user.objects.validator(request.POST)
+
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+        return redirect("/")
+        
     if (request.method == "POST"):
         user.objects.create(
             name=request.POST['name'],
