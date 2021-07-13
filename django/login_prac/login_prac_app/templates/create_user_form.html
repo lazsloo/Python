@@ -10,12 +10,20 @@
 
 <body>
     <h1>Create New User</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <form action="/new/user/create" method="POST">
         {% csrf_token %}
         <p>First Name: <input type="text" name="first_name"></p>
         <p>Last Name: <input type="text" name="last_name"></p>
         <p>E-mail Name: <input type="email" name="email"></p>
         <button type="submit">Create</button>
+        <a href="/">Go back</a>
     </form>
 </body>
 

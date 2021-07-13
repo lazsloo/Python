@@ -10,6 +10,13 @@
 
 <body>
     <h1>Update User {{ Users.id }}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <form action="/user/{{ Users.id }}/update" method="POST">
         {% csrf_token %}
         <p>First Name: <input type="text" value="{{ Users.first_name }}" name="first_name"></p>
@@ -17,6 +24,8 @@
         <p>E-mail Name: <input type="email" value="{{ Users.email }}" name="email"></p>
         <button type="submit">Update</button>
     </form>
+    <a href="/user/{{ Users.id }}/view">Go to Users Info</a>
+    <a href="/">Home Page</a>
 </body>
 
 </html>

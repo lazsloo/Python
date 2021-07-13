@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>User {{ Users.id }} Info</h1>
+    <p>First Name: {{ Users.first_name }}</p>
+    <p>Last Name: {{ Users.last_name }}</p>
+    <p>E-mail Name: {{ Users.email }}</p>
+    <p>Created At: {{ Users.created_at }}</p>
+    <p>Last Updated At: {{ Users.update_at }}</p>
+    <a href="/user/{{ Users.id }}/edit">Edit</a>
+    <a href="/">Go back</a>
+</body>
+
+</html>
