@@ -10,13 +10,13 @@ class UserManager(models.Manager):
         errors = {}
 ##########################################################
         users = User.objects.filter(email=post_data['email'])
-        # This is for our e-mail to make sure there's no duplicates
+# This is for our e-mail to make sure there's no duplicates
 ##########################################################
 
 #######################################################################
         if users:
             errors['exisiting_user'] = "Bruh use a different email doe"
-            # This will give an error if there's a user in the database already
+# This will give an error if there's a e-mail in the database that exist
 #######################################################################
 
 ##################################################################################
@@ -38,7 +38,7 @@ class UserManager(models.Manager):
 ###########################################################################################################
         if post_data['password'] != post_data['confirm_pw']:
             errors['confirm_pw'] = "Bruh they gotta match dog"
-        # This object is used for confirming passwords
+# This object is used for confirming passwords
 ###########################################################################################################
         return errors
 
