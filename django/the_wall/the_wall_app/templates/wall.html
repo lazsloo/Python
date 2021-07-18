@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruh Trumps Wall LMAO</title>
+</head>
+
+<body>
+    <h1>{{ Users.first_name }} {{ Users.last_name }}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="/post_message" method="POST">
+        {% csrf_token %}
+        <p>Messages: <input name="content" type="text"></p>
+        <button type="submit">Post Message</button>
+    </form>
+
+    <h2>The Bruh Wall:</h2>
+
+    {% for message in All_messages reversed %}
+    <p>{{ message.creator.first_name }} {{ message.creator.last_name }} - {{ message.created_at }}</p>
+    <p>{{ message.content }}</p>
+    {% for comment in message.comments.all %}
+    <p>{{ comment.creator.first_name }} {{ comment.creator.last_name }} - {{ comment.created_at }}</p>
+    <p>{{ comment.content }}</p>
+    {% endfor %}
+    
+    <form action="/message/{{ message.id }}/post_comment" method="POST">
+        {% csrf_token %}
+        <p>Message: <input name="content" type="text"></p>
+        <button type="submit">Post Comment</button>
+    </form>
+    {% endfor %}
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

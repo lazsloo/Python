@@ -18,9 +18,9 @@ class UserManager(models.Manager):
 
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(post_data['email']):           
-            errors['email'] = ("Invalid e-mail weeb")
+            errors['email'] = ("Invalid weeb e-mail")
 
-        if len(post_data['username']) < 4:
+        if len(post_data['username']) < 1:
             errors['username'] = "Isekai name not long enough"
 
         usernames = User.objects.filter(username=post_data['username'])
@@ -29,7 +29,7 @@ class UserManager(models.Manager):
 
         USERNAME_REGEX = re.compile(r'^[a-zA-Z0-9]')
         if not USERNAME_REGEX.match(post_data['username']):           
-            errors['username'] = ("Invalid character in your Isekai name")
+            errors['username'] = ("Invalid characters in your Isekai name")
 
         if len(post_data['password']) < 6:
             errors['password'] = "Password length not long enough weeb"
@@ -48,3 +48,12 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+class Anime(models.Model):
+    User = models.ForeignKey(User, related_name="Animes", on_delete = models.CASCADE)
+    title = models.CharField(max_length=45)
+    studio = models.CharField(max_length=45)
+    release_date = models.DateField()
+    desc = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
