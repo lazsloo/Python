@@ -35,6 +35,12 @@ def registration(request):
     return render(request, "login_successful.html", context)
 
 def login(request):
+    errors = User.objects.login_validator(request.POST)
+
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+
     users = User.objects.filter(email=request.POST['email'])
     if users:
         logged_user = users[0]
@@ -79,3 +85,24 @@ def post_comment(request, message_id):
     else:
         Messages = Comment.objects.create(content=request.POST['content'], creator=User.objects.get(id=request.session['userid']), message=Message.objects.get(id=message_id))
     return redirect('/wall')
+
+def user(request, user_id):
+    context = {
+        "Users": User.objects.get(id=user_id)
+    }
+    return render(request, "user.html", context)
+
+########################################################    
+def like(request, message_id):
+    message = Message.objects.get(id=message_id)
+    user = User.objects.get(id=request.session['userid'])
+    message.users_who_liked.add(user)
+    return redirect('/wall')
+
+def unlike(request, message_id):
+    message = Message.objects.get(id=message_id)
+    user = User.objects.get(id=request.session['userid'])
+    message.users_who_liked.remove(user)
+    return redirect('/wall')
+# Like and unlike button
+########################################################

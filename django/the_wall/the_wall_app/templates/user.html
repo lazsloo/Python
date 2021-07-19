@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruh Login Page</title>
+</head>
+
+<body>
+    <h1>{{ Users.first_name }} {{ Users.last_name }} Account Page</h1>
+    <h2>Messages Posted by {{ Users.first_name }} {{ Users.last_name }}:</h2>
+    {% for message in Users.messages.all %}
+    <p>{{ message.created_at }}</p>
+    <p>{{ message.content }}</p>
+    {% endfor %}
+    <h2>Comments Posted by {{ Users.first_name }} {{ Users.last_name }}:</h2>
+    {% for comment in Users.comments.all %}
+    <p>{{ comment.created_at }}</p>
+    <p>{{ comment.content }}</p>
+    {% endfor %}
+    <h2>Messages liked by {{ Users.first_name }} {{ Users.last_name }}</h2>
+    {% for message in Users.messages_user_liked.all %}
+    <p>{{ message.created_at }}</p>
+    <p>{{ message.content }}</p>
+    {% endfor %}
+    <a href="/wall">Go to Trumps wall</a>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

@@ -26,4 +26,7 @@ urlpatterns = [
     path('post_message', views.post_message),
     path('post_comment', views.post_comment),
     path('message/<int:message_id>/post_comment', views.post_comment),
+    path('user/<int:user_id>', views.user),
+    path('message/<int:message_id>/like', views.like),
+    path('message/<int:message_id>/unlike', views.unlike),
 ]

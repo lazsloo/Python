@@ -20,23 +20,35 @@
 
     <form action="/post_message" method="POST">
         {% csrf_token %}
-        <p>Messages: <input name="content" type="text"></p>
+        <p>Message: <input name="content" type="text"></p>
         <button type="submit">Post Message</button>
     </form>
 
     <h2>The Bruh Wall:</h2>
 
     {% for message in All_messages reversed %}
-    <p>{{ message.creator.first_name }} {{ message.creator.last_name }} - {{ message.created_at }}</p>
+    <p><a href="/user/{{ message.creator.id }}">{{ message.creator.first_name }} {{ message.creator.last_name }}</a> -
+        {{ message.created_at }}</p>
+    <!-- This is used for the like button -->
     <p>{{ message.content }}</p>
+    {% if message.users_who_liked.all %}
+    {% if Users in message.users_who_liked.all %}
+    <a href="/message/{{ message.id }}/unlike">Like: {{ message.users_who_liked.count }}</a>
+    {% else %}
+    <a href="/message/{{ message.id }}/like">Like: {{ message.users_who_liked.count }}</a>
+    {% endif %}
+    {% else %}
+    <a href="/message/{{ message.id }}/like">First Bruh Bump</a>
+    {% endif %}
+    <!--------------------------------->
     {% for comment in message.comments.all %}
-    <p>{{ comment.creator.first_name }} {{ comment.creator.last_name }} - {{ comment.created_at }}</p>
+    <p><a href="/user/{{ comment.creator.id }}">{{ comment.creator.first_name }} {{ comment.creator.last_name }}</a> -
+        {{ comment.created_at }}</p>
     <p>{{ comment.content }}</p>
     {% endfor %}
-    
     <form action="/message/{{ message.id }}/post_comment" method="POST">
         {% csrf_token %}
-        <p>Message: <input name="content" type="text"></p>
+        <p>Comment: <input name="content" type="text"></p>
         <button type="submit">Post Comment</button>
     </form>
     {% endfor %}
