@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+</head>
+<body>
+    <h1>Welcome {{ user.first_name }}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h2>Add a Favorite Book</h2>
+    <form action="/add_book" method="POST">
+        {% csrf_token %}
+        <p>Title: <input name="title" type="text"></p>
+        <p>Description: <input name="desc" type="text"></p>
+        <button type="submit">Add</button>
+    </form>
+    <h2>All Books</h2>
+    {% for book in books %}
+    <p><a href="/books/{{ book.id }}">{{ book.title }}</a></p>
+    <p>(Add by: {{ book.uploaded_by_id.first_name }} {{ book.uploaded_by_id.last_name }})</p>
+        {% if user in book.users_who_liked.all %}
+        <p>One of your liked books</p>
+        {% else %}
+        <a href="/books/{{ book.id }}/like">Add to Favorites</a>
+        {% endif %}
+    {% endfor %}
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

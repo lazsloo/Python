@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Welcome {{ user.first_name }} {{ user.last_name }}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/add_wish" method="POST">
+        {% csrf_token %}
+        <p>Wish: <input name="title" type="text"></p>
+        <p>Desc: <input name="desc" type="text"></p>
+        <button type="submit">Make Wish</button>
+    </form>
+    <table>
+        <tr>
+            <th>Wish:</th>
+            <th>Uploaded By:</th>
+            <th>Action:</th>
+        </tr>
+    </table>
+    <table>
+        {% for wish in wishes %}
+        <tr>
+            <th>{{ wish.title }}</th>
+            <th>{{ wish.uploaded_by_id.first_name }} {{ wish.uploaded_by_id.last_name }}</th>
+            <th><a href="/view_wish/{{ wish.id }}">View</a></th>
+            <!-- Gives only the user who made the wish the option to delete his own wish and no one elses or grant it -->
+            {% if user.id == wish.uploaded_by_id.id %}
+            <th><a href="/delete_wish/{{ wish.id }}">Delete</a></th>
+            {% else %}
+            <th><a href="/wish_granted/{{ wish.id }}">Grant wish</a></th>
+            {% endif %}
+            <!---------------------------------------------------------------------------------------------------------->
+        </tr>
+        {% endfor %}
+    </table>
+    <table>
+        <tr>
+            <th>Wish Granted!:</th>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>{{ wish.users_who_granted.first_name }}</th>
+        </tr>
+    </table>
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

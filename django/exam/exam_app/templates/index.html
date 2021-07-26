@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>The Wishing App</title>
+</head>
+
+<body>
+    <h1>Hello {{ user.first_name }}!</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="/logout">Logout</a>
+    <a href="/wishes/new">Make a wish!</a>
+    <h2>Your wish list</h2>
+    <table>
+        <tr>
+            <th>Item:</th>
+            <th>Date Added:</th>
+            <th>Actions:</th>
+        </tr>
+    </table>
+    <table>
+        {% for wish in wishes reversed %}
+        {% if wish.granted_wish == False %}
+        {% if user.id == wish.uploaded_by_id.id %}
+        <tr>
+            <th>{{ wish.title }}</th>
+            <th>{{ wish.created_at }}</th>
+            <th><a href="/delete_wish/{{ wish.id }}">Remove</a></th>
+            <th><a href="/wishes/edit/{{ wish.id }}">Edit</a></th>
+            <th><a href="/granted/{{ wish.id }}">Granted</a></th>
+            {% else %}
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </table>
+    <h2>Granted Wishes</h2>
+    <table>
+        <tr>
+            <th>Item:</th>
+            <th>Wisher</th>
+            <th>Dated Added:</th>
+            <th>Dated Granted:</th>
+        </tr>
+    </table>
+    <table>
+        {% for wish in wishes reversed%}
+        {% if wish.granted_wish == True %}
+        <tr>
+            <th>{{ wish.title }}</th>
+            <th>{{ wish.uploaded_by_id.first_name }}</th>
+            <th>{{ wish.created_at }}</th>
+            <th>{{ wish.updated_at }}</th>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</body>
+
+</html>

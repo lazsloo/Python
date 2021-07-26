@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome {{ user.first_name }} {{ user.last_name }}</h1>
+    <h2>Wish:</h2>
+    <p>{{ wish.title }}</p>
+    <h2>Description</h2>
+    <p>{{ wish.desc }}</p>
+    <h2>Wishers Name:</h2>
+    <p>{{ wish.uploaded_by_id.first_name }} {{ wish.uploaded_by_id.last_name }}</p>
+    <h2>Granted Wish:</h2>
+    {% for user in wish.users_who_granted.all %}
+    <p>{{ user.first_name }}</p>
+    {% endfor %}
+    <a href="/wish">Back to wish board</a>
+</body>
+</html>

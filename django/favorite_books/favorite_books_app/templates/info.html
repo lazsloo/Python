@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+</head>
+<body>
+    <h1>Welcome {{ user.first_name }} </h1>
+    <h2>{{ book.title }}</h2>
+    <p>Added by: {{ book.uploaded_by_id.first_name }} {{ book.uploaded_by_id.last_name }}</p>
+    <p>Add on: {{ book.created_at }}</p>
+    <p>Last updated: {{ book.updated_at }}</p>
+    <p>Description: {{ book.desc }}</p>
+    <h2>Users who like this book:</h2>
+    {% for user in book.users_who_liked.all %}
+<ul>
+    <li>{{ user.first_name }} {{ user.last_name }}</li>
+</ul>
+    {% endfor %}
+    {% if user_who_liked.all %}
+    {% else %}
+    <a href="/books/{{ book.id }}/like">Add to Favorites</a>
+    {% endif %}
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
