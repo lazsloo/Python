@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Registration</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Camped</title>
 </head>
+
 <body>
     <h1>Overcamped</h1>
     <p>Camping with friends is as much fun as cooking with friends</p>
@@ -17,22 +22,22 @@
     </ul>
     {% endif %}
     <h2>Registration</h2>
-    <form action="" method="POST">
+    <form action="/register" method="POST">
         {% csrf_token %}
         <p>First Name: <input name="first_name" type="text"></p>
         <p>Last Name: <input name="last_name" type="text"></p>
         <p>E-mail: <input name="email" type="email"></p>
         <p>Password: <input name="password" type="password"></p>
         <p>Confirm Password: <input name="confirm_pw" type="password"></p>
-        <p>Birthdate <input name="birthdate" type="date"></p>
         <button type="submit">Register</button>
     </form>
     <h2>Login</h2>
-    <form action="" method="POST">
+    <form action="/login" method="POST">
         {% csrf_token %}
         <p>E-mail Name: <input name="email" type="email"></p>
         <p>Password: <input name="password" type="password"></p>
         <button type="submit">Login</button>
     </form>
 </body>
+
 </html>
