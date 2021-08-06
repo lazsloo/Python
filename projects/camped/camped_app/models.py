@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.fields.related import ForeignKey, ManyToManyField
+from django.db.models.deletion import CASCADE
 import re
 
 # Create your models here.
@@ -46,5 +48,7 @@ class Camp(models.Model):
     attendee = models.IntegerField()
     date = models.DateField()
     time = models.TimeField()
+    camped_event = ForeignKey(User, related_name="host_camped", on_delete=CASCADE)
+    camped_join = ManyToManyField(User, related_name="user_joined")
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
