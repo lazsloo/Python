@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "partials/header.html" %}
+</head>
+
+<body>
+    {% include "partials/navbar.html" %}
+    <h1>Camped Event</h1>
+    <p>Host: {{ camp.camped_event.first_name }} {{ camp.camped_event.last_name}}</p>
+    <p>Camped Name: {{ camp.title }}</p>
+    <p>Type: {{ camp.type }}</p>
+    <p>Location: {{ camp.location }}</p>
+    <p>Attending: {{ camp.attendee }}</p>
+    <p>Date: {{camp.date }}</p>
+    <p>Time: {{ camp.time }}</p>
+    {% if user.id == camp.camped_event.id %}
+    <a href="/camped/{{ camp.id }}/edit"">Edit</a>
+    <a href="/HQ">Back</a>
+    <a href="/delete/{{ camp.id }}">Delete</a>
+    {% else %}
+    <a href="">Leave</a>
+    <a href="/HQ">Back</a>
+    {% endif %}
+</body>
+
+</html>

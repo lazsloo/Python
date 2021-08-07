@@ -7,10 +7,10 @@ import re
 class UserManager(models.Manager):
     def validator(self, post_data):
         errors = {}
-        if len(post_data['first_name']) <2:
+        if len(post_data['first_name']) < 2:
             errors['first_name'] = "Enter valid first name"
 
-        if len(post_data['last_name']) <2:
+        if len(post_data['last_name']) < 2:
             errors['last_name'] = "Enter valid last name"
 
         users = User.objects.filter(email=post_data['email'])
@@ -29,6 +29,18 @@ class UserManager(models.Manager):
 
         if post_data['password'] != post_data['confirm_pw']:
             errors['confirm_pw'] = "Password has to match"
+
+        return errors
+
+class CampManager(models.Manager):
+    def validator(self, post_data):
+        errors = {}
+
+        if len(post_data['title']) < 2:
+            errors['title'] = "Title must be more than 2 characters"
+
+        if len(post_data['location']) < 1:
+            errors['location'] = "Must enter a location"
 
         return errors
 
@@ -52,3 +64,4 @@ class Camp(models.Model):
     camped_join = ManyToManyField(User, related_name="user_joined")
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    objects = CampManager()

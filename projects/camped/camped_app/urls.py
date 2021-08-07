@@ -25,4 +25,9 @@ urlpatterns = [
     path('register', views.register),
     path('login', views.login),
     path('logout', views.logout),
+    path('create', views.camped_create),
+    path('camped/<int:camp_id>', views.info),
+    path('delete/<int:camp_id>', views.delete),
+    path('camped/<int:camp_id>/edit', views.edit),
+    path('update_camp/<int:camp_id>', views.update_camp),
 ]
