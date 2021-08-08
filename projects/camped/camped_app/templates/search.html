@@ -8,6 +8,11 @@
 <body>
     {% include "partials/navbar.html" %}
     <h1>Future Search</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>Search Camped: <input placeholder="Search" type="search"></p>
+        <button type="submit">Search</button>
+    </form>
 </body>
 
 </html>

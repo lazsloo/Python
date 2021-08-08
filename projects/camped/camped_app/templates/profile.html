@@ -16,15 +16,20 @@
     </ul>
     {% endif %}
     <h5>Update Profile</h5>
+    {% if user == user.id %}
     <form action="/update_user/{{ user.id }}" method="POST">
         {% csrf_token %}
-        <p>First Name: <input name="first_name" value="{{ user.first_name }}"type="text"></p>
+        <p>First Name: <input name="first_name" value="{{ user.first_name }}" type="text"></p>
         <p>Last Name: <input name="last_name" value="{{ user.last_name }}" type="text"></p>
         <p>E-mail: <input name="email" value="{{ user.email }}" type="email"></p>
-        <p>Password: <input name="password" type="password"></p>
-        <p>Confirm Password: <input name="confirm_pw" type="password"></p>
+        <p>Password: <input name="password" value="{{ user.password }}" type="password"></p>
+        <p>Confirm Password: <input name="confirm_pw" value="{{ user.password }}" type="password"></p>
         <button type="submit">Update</button>
     </form>
+    {% else %}
+    <p>Name: {{ user.first_name }} {{user.last_name }}</p>
+    <p>E-mail: {{ user.email }}</p>
+    {% endif %}
 </body>
 
 </html>

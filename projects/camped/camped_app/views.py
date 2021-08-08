@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from . models import User, Camp
@@ -17,10 +18,36 @@ def HQ(request):
     return render(request, "HQ.html", context)
 
 def host(request):
+    z = [
+        'Car Camping',
+        'Overlanding',
+        'Backpacking',
+        'Bicycle Camping',
+        'Winter Camping',
+        'Canone Camping',
+        'Rv Camping'
+    ]
+    x = [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+    ]
     context = {
-        "user": User.objects.get(id=request.session['userid']),
+        "user": User.objects.get(id=request.session['userid'])
     }
-    return render(request, "host.html", context)
+    return render(request, 'host.html',context | {'z': z} | {'x': x})
 
 def info(request, camp_id):
     context = {
@@ -30,11 +57,37 @@ def info(request, camp_id):
     return render(request, "info.html", context)
 
 def edit(request, camp_id):
+    z = [
+        'Car Camping',
+        'Overlanding',
+        'Backpacking',
+        'Bicycle Camping',
+        'Winter Camping',
+        'Canone Camping',
+        'Rv Camping'
+    ]
+    x = [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+    ]
     context = {
         "user": User.objects.get(id=request.session['userid']),
         "camp": Camp.objects.get(id=camp_id)
     }
-    return render(request, "edit.html", context)
+    return render(request, "edit.html", context | {'z': z} | {'x': x})
 
 def search(request):
     context = {

@@ -18,37 +18,28 @@
     <form action="/update_camp/{{ camp.id }}" method="POST">
         {% csrf_token %}
         <p>Camped Name: <input name="title" value="{{ camp.title }}" type="text"></p>
-        <p>Type: <select name="type" value="{{ camp.type }}">
-            <option value="Car camping">Car Camping</option>
-            <option value="Overlanding">Overlanding</option>
-            <option value="Backpacking">Backpacking</option>
-            <option value="Bicycle camping">Bicycle Camping</option>
-            <option value="Winter camping">Winter Camping</option>
-            <option value="Canone camping">Canoe Camping</option>
-            <option value="Rv camping">Rv Camping</option>
-        </select></p>
+        <p>Type: <select name="type">
+                {% if camp.type %}
+                <option selected value="{{ camp.type }}">{{ camp.type }}</option>
+                {% for i in z %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+                {% endif %}
+            </select></p>
         <p>Location: <input name="location" value="{{ camp.location }}" type="text"></p>
-        <p>Attendees: <select name="attendee" value="{{ camp.attendee }}">
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-        </select></p>
-        <p>Date: <input name="date" value="{{ camp.date }}" type="date"></p>
-        <p>Time: <input name="time" value="{{ camp.time }}" type="time"></p>
+        <p>Attendees: <select name="attendee">
+                {% if camp.attendee %}
+                <option selected value="{{ camp.attendee }}">{{ camp.attendee }}</option>
+                {% for i in x %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+                {% endif %}
+            </select></p>
+        <p>Date: <input name="date" value="{{ camp.date|date:'Y-m-d' }}" type="date"></p>
+        <p>Time: <input name="time" value="{{ camp.time|time:'h:i' }}" type="time"></p>
         <button type="submit">Update</button>
     </form>
+    <a href="/camped/{{ camp.id }}"><button>Back</button></a>
 </body>
 
 </html>
