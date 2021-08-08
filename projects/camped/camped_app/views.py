@@ -43,9 +43,9 @@ def search(request):
     }
     return render(request, "search.html", context)
 
-def profile(request):
+def profile(request, user_id):
     context = {
-        "user": User.objects.get(id=request.session['userid']),
+        "user": User.objects.get(id=user_id),
         "camp": Camp.objects.all()
     }
     return render(request, "profile.html", context)
@@ -59,14 +59,14 @@ def register(request):
         password = request.POST['password']
         pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()   
         print(pw_hash)
-        Users = User.objects.create(
+        users = User.objects.create(
             first_name=request.POST['first_name'], 
             last_name=request.POST['last_name'], 
             email=request.POST['email'], 
             password=pw_hash,
             )
         messages.success(request, "Registration successful!")
-        request.session['userid'] = Users.id
+        request.session['userid'] = users.id
         return redirect("/HQ")
     return redirect("/")
 
@@ -104,7 +104,7 @@ def camped_create(request):
             time=request.POST['time'],
             camped_event=User.objects.get(id=request.session['userid']))
         user = User.objects.get(id=request.session['userid'])
-        user.host_camped.add(camp)
+        user.user_joined.add(camp)
         return redirect(f"/camped/{camp.id}")
     return redirect("/host")
 
@@ -116,12 +116,10 @@ def delete(request, camp_id):
 
 def update_camp (request, camp_id):
     errors = Camp.objects.validator(request.POST)
-
     if len(errors) > 0:
         for k, v in errors.items():
             messages.error(request, v)
         return redirect(f"/edit/{camp_id}")
-
     if (request.method == "POST"):
         update_camp = Camp.objects.get(id=camp_id)
         update_camp.title = request.POST['title']
@@ -132,3 +130,22 @@ def update_camp (request, camp_id):
         update_camp.time = request.POST['time']
         update_camp.save()
         return redirect(f"/camped/{camp_id}")
+
+def update_user (request, user_id):
+    errors = User.objects.validator_update(request.POST)
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+        return redirect(f"/profile/{user_id}")
+    if (request.method == "POST"):
+        password = request.POST['password']
+        pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()   
+        print(pw_hash)
+        update_user = User.objects.get(id=user_id)
+        update_user.first_name = request.POST['first_name']
+        update_user.last_name = request.POST['last_name']
+        update_user.email = request.POST['email']
+        update_user.password = password=pw_hash
+        update_user.save()
+        messages.error(request, "User profile updated")
+        return redirect(f"/profile/{user_id}")

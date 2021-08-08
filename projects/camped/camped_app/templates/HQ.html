@@ -31,7 +31,7 @@
             <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
             <th>{{ camp.type }}</th>
             <th>{{ camp.location }}</th>
-            <th>{{ camp.attendee }}</th>
+            <th>{{ camp.camped_join.count }}/{{ camp.attendee }}</th>
             <th>{{ camp.date }}</th>
             <th>{{ camp.time }}</th>
         </tr>

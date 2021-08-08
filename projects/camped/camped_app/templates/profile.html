@@ -7,7 +7,24 @@
 
 <body>
     {% include "partials/navbar.html" %}
-    <h1>Future Profile</h1>
+    <h1>{{ user.first_name }} Profile</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h5>Update Profile</h5>
+    <form action="/update_user/{{ user.id }}" method="POST">
+        {% csrf_token %}
+        <p>First Name: <input name="first_name" value="{{ user.first_name }}"type="text"></p>
+        <p>Last Name: <input name="last_name" value="{{ user.last_name }}" type="text"></p>
+        <p>E-mail: <input name="email" value="{{ user.email }}" type="email"></p>
+        <p>Password: <input name="password" type="password"></p>
+        <p>Confirm Password: <input name="confirm_pw" type="password"></p>
+        <button type="submit">Update</button>
+    </form>
 </body>
 
 </html>

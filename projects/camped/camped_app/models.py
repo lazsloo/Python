@@ -32,6 +32,31 @@ class UserManager(models.Manager):
 
         return errors
 
+class UpdateManger(models.Manager):
+    def validator_update(self, post_data):
+        errors = {}
+
+        if len(post_data['first_name']) < 2:
+            errors['first_name'] = "Enter valid first name"
+
+        if len(post_data['last_name']) < 2:
+            errors['last_name'] = "Enter valid last name"
+
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(post_data['email']):           
+            errors['email'] = "Please enter valid e-mail address"
+
+        if len(post_data['email']) < 1:
+            errors['email'] = "E-mail cannot be blank"
+
+        if len(post_data['password']) < 8:
+            errors['password'] = "Password has to be more then 8 characters"
+
+        if post_data['password'] != post_data['confirm_pw']:
+            errors['confirm_pw'] = "Password has to match"
+
+        return errors
+
 class CampManager(models.Manager):
     def validator(self, post_data):
         errors = {}
@@ -52,6 +77,7 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+    objects = UpdateManger()
 
 class Camp(models.Model):
     title = models.CharField(max_length=45)

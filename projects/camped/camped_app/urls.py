@@ -21,13 +21,15 @@ urlpatterns = [
     path('HQ', views.HQ),
     path('host', views.host),
     path('search', views.search),
-    path('profile', views.profile),
     path('register', views.register),
     path('login', views.login),
     path('logout', views.logout),
     path('create', views.camped_create),
+    path('profile/<int:user_id>', views.profile),
+    path('update_user/<int:user_id>', views.update_user),
     path('camped/<int:camp_id>', views.info),
     path('delete/<int:camp_id>', views.delete),
     path('camped/<int:camp_id>/edit', views.edit),
     path('update_camp/<int:camp_id>', views.update_camp),
+
 ]
