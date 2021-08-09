@@ -29,8 +29,11 @@
     <table>
         {% for camp in camp %}
         <tr>
+            {% if camp.camped_event.id == request.session.userid %}
+            <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
+            {% else %}
             <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
-            </th>
+            {% endif %}
             <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
             <th>{{ camp.type }}</th>
             <th>{{ camp.location }}</th>

@@ -17,7 +17,7 @@ class UserManager(models.Manager):
         if users:
             errors['existing_user'] = "E-mail already in use"
 
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        EMAIL_REGEX = re.compile(r'^[a-z0-9.+_-]+@[a-z0-9._-]+\.[a-z]+$')
         if not EMAIL_REGEX.match(post_data['email']):           
             errors['email'] = "Please enter valid e-mail address"
 
@@ -46,6 +46,12 @@ class UserManager(models.Manager):
 
         if len(post_data['email']) < 1:
             errors['email'] = "E-mail cannot be blank"
+
+        if len(post_data['password']) < 8:
+            errors['password'] = "Password has to be more then 8 characters"
+
+        if post_data['password'] != post_data['confirm_pw']:
+            errors['confirm_pw'] = "Password has to match"
 
         return errors
 

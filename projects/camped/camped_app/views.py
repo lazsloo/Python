@@ -28,26 +28,9 @@ def host(request):
         'Rv Camping'
     ]
     x = [
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16
+        2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
     ]
-    context = {
-        "user": User.objects.get(id=request.session['userid'])
-    }
-    return render(request, 'host.html',context | {'z': z} | {'x': x})
+    return render(request, 'host.html', {'z': z} | {'x': x})
 
 def info(request, camp_id):
     context = {
@@ -67,21 +50,7 @@ def edit(request, camp_id):
         'Rv Camping'
     ]
     x = [
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16
+        2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
     ]
     context = {
         "user": User.objects.get(id=request.session['userid']),

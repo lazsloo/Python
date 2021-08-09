@@ -7,7 +7,6 @@
 
 <body>
     {% include "partials/navbar.html" %}
-    {% if user.id  %}
     <h1>{{ user.first_name }} Profile</h1>
     {% if messages %}
     <ul class="messages">
@@ -16,7 +15,9 @@
         {% endfor %}
     </ul>
     {% endif %}
+    {% if user.id == request.session.userid %}
     <h5>Update Profile</h5>
+    {% csrf_token %}
     <form action="/update_user/{{ user.id }}" method="POST">
         {% csrf_token %}
         <p>First Name: <input name="first_name" value="{{ user.first_name }}" type="text"></p>
@@ -30,6 +31,7 @@
     <p>Name: {{ user.first_name }} {{user.last_name }}</p>
     <p>E-mail: {{ user.email }}</p>
     {% endif %}
+    <a href="/HQ"><button>Back</button></a>
 </body>
 
 </html>

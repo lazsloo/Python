@@ -22,7 +22,9 @@
                 {% if camp.type %}
                 <option selected value="{{ camp.type }}">{{ camp.type }}</option>
                 {% for i in z %}
+                {% if camp.type != i %}
                 <option value="{{ i }}">{{ i }}</option>
+                {% endif %}
                 {% endfor %}
                 {% endif %}
             </select></p>
@@ -31,7 +33,9 @@
                 {% if camp.attendee %}
                 <option selected value="{{ camp.attendee }}">{{ camp.attendee }}</option>
                 {% for i in x %}
+                {% if camp.attendee != i %}
                 <option value="{{ i }}">{{ i }}</option>
+                {% endif %}
                 {% endfor %}
                 {% endif %}
             </select></p>

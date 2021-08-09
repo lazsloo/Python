@@ -8,8 +8,12 @@
 <body>
     {% include "partials/navbar.html" %}
     <h1>Camped Event</h1>
-    <p>Host: <a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name}}</a>
+    {% if camp.camped_event.id == request.session.userid %}
+    <p>Host: {{ camp.camped_event.first_name }} {{ camp.camped_event.last_name}}</p>
     </p>
+    {% else %}
+    <p>Host: <a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name}}</a>
+    {% endif %}
     <p>Camped Name: {{ camp.title }}</p>
     <p>Type: {{ camp.type }}</p>
     <p>Location: {{ camp.location }}</p>
