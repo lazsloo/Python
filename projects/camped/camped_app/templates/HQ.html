@@ -17,6 +17,7 @@
     <h1>Welcome {{ user.first_name }}!</h1>
     <table>
         <tr>
+            <th>Host:</th>
             <th>Camped Name:</th>
             <th>Type:</th>
             <th>Location:</th>
@@ -28,6 +29,8 @@
     <table>
         {% for camp in camp %}
         <tr>
+            <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
+            </th>
             <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
             <th>{{ camp.type }}</th>
             <th>{{ camp.location }}</th>

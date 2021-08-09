@@ -185,7 +185,7 @@ def update_camp (request, camp_id):
         return redirect(f"/camped/{camp_id}")
 
 def update_user (request, user_id):
-    errors = User.objects.validator_update(request.POST)
+    errors = User.objects.update_validator(request.POST)
     if len(errors) > 0:
         for k, v in errors.items():
             messages.error(request, v)
