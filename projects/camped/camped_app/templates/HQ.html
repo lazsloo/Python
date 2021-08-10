@@ -16,40 +16,50 @@
     {% endif %}
     <h1>Welcome {{ user.first_name }}!</h1>
     <table>
-        <tr>
-            <th>Host:</th>
-            <th>Camped Name:</th>
-            <th>Type:</th>
-            <th>Location:</th>
-            <th>Attending:</th>
-            <th>Date:</th>
-            <th>Time:</th>
-            <th>Action:</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Host:</th>
+                <th>Camped Name:</th>
+                <th>Type:</th>
+                <th>Location:</th>
+                <th>Attending:</th>
+                <th>Date:</th>
+                <th>Time:</th>
+                <th>Action:</th>
+            </tr>
+        </thead>
     </table>
     <table>
-        {% for camp in camp %}
-        <tr>
-            {% if camp.camped_event.id == request.session.userid %}
-            <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
-            {% else %}
-            <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
-            {% endif %}
-            <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
-            <th>{{ camp.type }}</th>
-            <th>{{ camp.location }}</th>
-            <th>{{ camp.camped_join.count }}/{{ camp.attendee }}</th>
-            <th>{{ camp.date }}</th>
-            <th>{{ camp.time }}</th>
-            {% if user in camp.camped_join.all %}
-            <th>Joined</th>
-            {% elif request.session.userid == camp.camped_event.id %}
-            <th>Host</th>
-            {% else %}
-            <th><a href="/HQ/{{ camp.id }}/join">Join</a></th>
-            {% endif %}
-        </tr>
-        {% endfor %}
+        <tbody>
+            {% for camp in camp %}
+            <tr>
+                {% if camp.camped_event.id == request.session.userid %}
+                <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
+                {% else %}
+                <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
+                {% endif %}
+                <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
+                <th>{{ camp.type }}</th>
+                <th>{{ camp.location }}</th>
+                {% if camp.camped_join.count == camp.attendee %}
+                <th>Full!</th>
+                {% else %}
+                <th>{{ camp.camped_join.count }}/{{ camp.attendee }}</th>
+                {% endif %}
+                <th>{{ camp.date }}</th>
+                <th>{{ camp.time }}</th>
+                {% if request.session.userid == camp.camped_event.id %}
+                <th>Host</th>
+                {% elif user in camp.camped_join.all %}
+                <th>Joined!</th>
+                {% elif camp.camped_join.count == camp.attendee %}
+                <th>Full!</th>
+                {% else %}
+                <th><a href="/HQ/{{ camp.id }}/join">Join</a></th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 

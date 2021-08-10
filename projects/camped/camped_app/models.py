@@ -49,7 +49,7 @@ class UserManager(models.Manager):
             errors['email'] = "E-mail cannot be blank"
 
         if len(post_data['password']) < 8:
-            errors['password'] = "Password has to be more then 8 characters"
+            errors['password'] = "Re-enter password or update password"
 
         if post_data['password'] != post_data['confirm_pw']:
             errors['confirm_pw'] = "Password has to match"
@@ -67,7 +67,7 @@ class CampManager(models.Manager):
             errors['location'] = "Must enter a location"
         
         if datetime.strptime(post_data['date'], '%Y-%m-%d') < datetime.now():
-            errors['date'] = 'Enter valid date'
+            errors['date'] = 'Cannot do past dates'
 
         return errors
 
