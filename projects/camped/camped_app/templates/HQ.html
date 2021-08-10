@@ -24,6 +24,7 @@
             <th>Attending:</th>
             <th>Date:</th>
             <th>Time:</th>
+            <th>Action:</th>
         </tr>
     </table>
     <table>
@@ -40,6 +41,13 @@
             <th>{{ camp.camped_join.count }}/{{ camp.attendee }}</th>
             <th>{{ camp.date }}</th>
             <th>{{ camp.time }}</th>
+            {% if user in camp.camped_join.all %}
+            <th>Joined</th>
+            {% elif request.session.userid == camp.camped_event.id %}
+            <th>Host</th>
+            {% else %}
+            <th><a href="/HQ/{{ camp.id }}/join">Join</a></th>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

@@ -7,7 +7,6 @@
 
 <body>
     {% include "partials/navbar.html" %}
-    <h1>{{ user.first_name }} Profile</h1>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -15,6 +14,7 @@
         {% endfor %}
     </ul>
     {% endif %}
+    <h1>{{ user.first_name }} Profile</h1>
     {% if user.id == request.session.userid %}
     <h5>Update Profile</h5>
     {% csrf_token %}

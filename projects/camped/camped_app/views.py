@@ -127,13 +127,30 @@ def camped_create(request):
             camped_event=User.objects.get(id=request.session['userid']))
         user = User.objects.get(id=request.session['userid'])
         user.user_joined.add(camp)
+        messages.error(request, "Camped event successfully created")
         return redirect(f"/camped/{camp.id}")
     return redirect("/host")
+
+def join(request, camp_id):
+    joined = Camp.objects.get(id=camp_id)
+    user = User.objects.get(id=request.session['userid'])
+    joined.camped_join.add(user)
+    messages.error(request, "Joined Camped event")
+    return redirect('/HQ')
+
+def leave(request, camp_id):
+    leave = Camp.objects.get(id=camp_id)
+    user = User.objects.get(id=request.session['userid'])
+    leave.camped_join.remove(user)
+    messages.error(request, "Left Camped event")
+    return redirect('/HQ')
+
 
 def delete(request, camp_id):
     delete_camp = Camp.objects.get(id=camp_id)
     if (request.method=="GET"):
         delete_camp.delete()
+        messages.error(request, "Camped event successfully deleted")
     return redirect("/")
 
 def update_camp (request, camp_id):
@@ -141,7 +158,7 @@ def update_camp (request, camp_id):
     if len(errors) > 0:
         for k, v in errors.items():
             messages.error(request, v)
-        return redirect(f"/edit/{camp_id}")
+        return redirect(f"/camped/{camp_id}/edit")
     if (request.method == "POST"):
         update_camp = Camp.objects.get(id=camp_id)
         update_camp.title = request.POST['title']
@@ -151,6 +168,7 @@ def update_camp (request, camp_id):
         update_camp.date = request.POST['date']
         update_camp.time = request.POST['time']
         update_camp.save()
+        messages.error(request, "Camped event successfully updated")
         return redirect(f"/camped/{camp_id}")
 
 def update_user (request, user_id):
@@ -171,3 +189,4 @@ def update_user (request, user_id):
         update_user.save()
         messages.error(request, "User profile updated")
         return redirect(f"/profile/{user_id}")
+

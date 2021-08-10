@@ -25,6 +25,8 @@ urlpatterns = [
     path('login', views.login),
     path('logout', views.logout),
     path('create', views.camped_create),
+    path('HQ/<int:camp_id>/join', views.join),
+    path('HQ/<int:camp_id>/leave', views.leave),
     path('profile/<int:user_id>', views.profile),
     path('update_user/<int:user_id>', views.update_user),
     path('camped/<int:camp_id>', views.info),

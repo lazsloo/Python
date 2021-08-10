@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 from django.db.models.deletion import CASCADE
+from datetime import datetime
 import re
 
 # Create your models here.
@@ -40,7 +41,7 @@ class UserManager(models.Manager):
         if len(post_data['last_name']) < 2:
             errors['last_name'] = "Enter valid last name"
 
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        EMAIL_REGEX = re.compile(r'^[a-z0-9.+_-]+@[a-z0-9._-]+\.[a-z]+$')
         if not EMAIL_REGEX.match(post_data['email']):           
             errors['email'] = "Please enter valid e-mail address"
 
@@ -60,10 +61,13 @@ class CampManager(models.Manager):
         errors = {}
 
         if len(post_data['title']) < 2:
-            errors['title'] = "Title must be more than 2 characters"
+            errors['title'] = "The camped name must be more than 2 characters"
 
         if len(post_data['location']) < 1:
             errors['location'] = "Must enter a location"
+        
+        if datetime.strptime(post_data['date'], '%Y-%m-%d') < datetime.now():
+            errors['date'] = 'Enter valid date'
 
         return errors
 

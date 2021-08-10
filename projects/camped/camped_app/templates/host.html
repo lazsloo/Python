@@ -7,7 +7,6 @@
 
 <body>
     {% include "partials/navbar.html" %}
-    <h1>Create Camped!</h1>
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -15,6 +14,7 @@
         {% endfor %}
     </ul>
     {% endif %}
+    <h1>Create Camped!</h1>
     <form action="/create" method="POST">
         {% csrf_token %}
         <p>Camped Name: <input name="title" type="text"></p>
@@ -29,8 +29,8 @@
                 <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}
             </select></p>
-        <p>Date: <input name="date" type="date"></p>
-        <p>Time: <input name="time" type="time"></p>
+        <p>Date: <input name="date" type="date" required></p>
+        <p>Time: <input name="time" type="time" required></p>
         <button type="submit">Submit</button>
     </form>
     <a href="/HQ"><button>Back</button></a>

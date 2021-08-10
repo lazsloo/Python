@@ -7,12 +7,19 @@
 
 <body>
     {% include "partials/navbar.html" %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <h1>Camped Event</h1>
     {% if camp.camped_event.id == request.session.userid %}
-    <p>Host: {{ camp.camped_event.first_name }} {{ camp.camped_event.last_name}}</p>
+    <p>Host: {{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</p>
     </p>
     {% else %}
-    <p>Host: <a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name}}</a>
+    <p>Host: <a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a>
     {% endif %}
     <p>Camped Name: {{ camp.title }}</p>
     <p>Type: {{ camp.type }}</p>
@@ -20,6 +27,10 @@
     <p>Attending: {{ camp.attendee }}</p>
     <p>Date: {{camp.date }}</p>
     <p>Time: {{ camp.time }}</p>
+    {% if user in camp.camped_join.all and camp.camped_event.id != request.session.userid %}
+    <a href="/HQ/{{ camp.id }}/leave"><button>Leave</button></a>
+    {% else %}
+    {% endif %}
     {% if user.id == camp.camped_event.id %}
     <a href="/camped/{{ camp.id }}/edit"><button>Edit</button></a>
     <a href="/HQ"><button>Back</button></a>
