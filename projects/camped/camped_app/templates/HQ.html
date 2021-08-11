@@ -15,6 +15,46 @@
     </ul>
     {% endif %}
     <h1>Welcome {{ user.first_name }}!</h1>
+    <h5>The date is {{ date }}. Todays Camped event:</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Host:</th>
+                <th>Camped Name:</th>
+                <th>Type:</th>
+                <th>Location:</th>
+                <th>Attending:</th>
+                <th>Date:</th>
+                <th>Time:</th>
+            </tr>
+        </thead>
+    </table>
+    <table>
+        <tbody>
+            {% for camp in camp %}
+            {% if date == camp.date %}
+            <tr>
+                {% if camp.camped_event.id == request.session.userid %}
+                <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
+                {% else %}
+                <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
+                {% endif %}
+                <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
+                <th>{{ camp.type }}</th>
+                <th>{{ camp.location }}</th>
+                {% if camp.camped_join.count == camp.attendee %}
+                <th>Full!</th>
+                {% else %}
+                <th>{{ camp.camped_join.count }}/{{ camp.attendee }}</th>
+                {% endif %}
+                <th>{{ camp.date }}</th>
+                <th>{{ camp.time }}</th>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <h5>Upcoming Camped events</h5>
     <table>
         <thead>
             <tr>
@@ -32,6 +72,53 @@
     <table>
         <tbody>
             {% for camp in camp %}
+            {% if user in camp.camped_join.all and date != camp.date %}
+            <tr>
+                {% if camp.camped_event.id == request.session.userid %}
+                <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
+                {% else %}
+                <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
+                {% endif %}
+                <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
+                <th>{{ camp.type }}</th>
+                <th>{{ camp.location }}</th>
+                {% if camp.camped_join.count == camp.attendee %}
+                <th>Full!</th>
+                {% else %}
+                <th>{{ camp.camped_join.count }}/{{ camp.attendee }}</th>
+                {% endif %}
+                <th>{{ camp.date }}</th>
+                <th>{{ camp.time }}</th>
+                {% if request.session.userid == camp.camped_event.id %}
+                <th>Host</th>
+                {% else %}
+                <th>Joined!</th>
+                {% endif %}
+            </tr>
+            {% else %}
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <h5>Camped events</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Host:</th>
+                <th>Camped Name:</th>
+                <th>Type:</th>
+                <th>Location:</th>
+                <th>Attending:</th>
+                <th>Date:</th>
+                <th>Time:</th>
+                <th>Action:</th>
+            </tr>
+        </thead>
+    </table>
+    <table>
+        <tbody>
+            {% for camp in camp %}
+            {% if user not in camp.camped_join.all %}
             <tr>
                 {% if camp.camped_event.id == request.session.userid %}
                 <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
@@ -58,6 +145,8 @@
                 <th><a href="/HQ/{{ camp.id }}/join">Join</a></th>
                 {% endif %}
             </tr>
+            {% else %}
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>

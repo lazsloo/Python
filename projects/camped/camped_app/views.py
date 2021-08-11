@@ -1,7 +1,7 @@
-import re
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from . models import User, Camp
+from datetime import datetime
 import bcrypt
 
 # Create your views here.
@@ -11,7 +11,9 @@ def reg_login(request):
         return render(request, 'reg_login.html')
 
 def HQ(request):
+    now = datetime.now()
     context = {
+        "date": now.strftime("%Y-%m-%d"),
         "user": User.objects.get(id=request.session['userid']),
         "camp": Camp.objects.all()
     }
@@ -189,4 +191,3 @@ def update_user (request, user_id):
         update_user.save()
         messages.error(request, "User profile updated")
         return redirect(f"/profile/{user_id}")
-
