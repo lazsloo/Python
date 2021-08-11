@@ -13,7 +13,7 @@ def reg_login(request):
 def HQ(request):
     now = datetime.now()
     context = {
-        "date": now.strftime("%Y-%m-%d"),
+        "date": now.strftime("%Y/%m/%d"),
         "user": User.objects.get(id=request.session['userid']),
         "camp": Camp.objects.all()
     }
@@ -60,12 +60,14 @@ def edit(request, camp_id):
     }
     return render(request, "edit.html", context | {'z': z} | {'x': x})
 
-def search(request):
+def camped(request):
+    now = datetime.now()
     context = {
+        "date": now.strftime("%Y/%m/%d"),
         "user": User.objects.get(id=request.session['userid']),
         "camp": Camp.objects.all()
     }
-    return render(request, "search.html", context)
+    return render(request, "camped.html", context)
 
 def profile(request, user_id):
     context = {
@@ -191,3 +193,4 @@ def update_user (request, user_id):
         update_user.save()
         messages.error(request, "User profile updated")
         return redirect(f"/profile/{user_id}")
+

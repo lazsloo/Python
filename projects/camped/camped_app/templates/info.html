@@ -33,10 +33,12 @@
     {% endif %}
     {% if user.id == camp.camped_event.id %}
     <a href="/camped/{{ camp.id }}/edit"><button>Edit</button></a>
-    <a href="/HQ"><button>Back</button></a>
+    <a href="/HQ"><button>Home</button></a>
+    <a href="/camped"><button>Camped</button></a>
     <a href="/delete/{{ camp.id }}"><button>Delete</button></a>
     {% else %}
-    <a href="/HQ"><button>Back</button></a>
+    <a href="/HQ"><button>Home</button></a>
+    <a href="/camped"><button>Camped</button></a>
     {% endif %}
 </body>
 

@@ -20,7 +20,7 @@ urlpatterns = [
     path('', views.reg_login),
     path('HQ', views.HQ),
     path('host', views.host),
-    path('search', views.search),
+    path('camped', views.camped),
     path('register', views.register),
     path('login', views.login),
     path('logout', views.logout),

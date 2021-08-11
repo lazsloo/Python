@@ -40,7 +40,7 @@
                 {% endif %}
             </select></p>
         <p>Date: <input name="date" value="{{ camp.date|date:'Y-m-d' }}" type="date" required></p>
-        <p>Time: <input name="time" value="{{ camp.time|time:'h:i' }}" type="time" required></p>
+        <p>Time: <input name="time" value="{{ camp.time|time:'H:i' }}" type="time" required></p>
         <button type="submit">Update</button>
     </form>
     <a href="/camped/{{ camp.id }}"><button>Back</button></a>
