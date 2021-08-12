@@ -70,7 +70,7 @@
     </table>
     <table>
         <tbody>
-            {% for camp in camp %}
+            {% for camp in camp reversed%}
             {% if date < camp.date|date:"Y/m/d" %}
             <tr>
                 {% if camp.camped_event.id == request.session.userid %}
