@@ -21,7 +21,7 @@ def HQ(request):
 
 def host(request):
     z = [
-        'Car Camping',
+        'Tent Camping',
         'Overlanding',
         'Backpacking',
         'Bicycle Camping',
@@ -43,7 +43,7 @@ def info(request, camp_id):
 
 def edit(request, camp_id):
     z = [
-        'Car Camping',
+        'Tent Camping',
         'Overlanding',
         'Backpacking',
         'Bicycle Camping',
