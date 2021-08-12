@@ -3,14 +3,7 @@
 
 <head>
     {% include "partials/header.html" %}
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAT-IcAhiMHCi7ijgIsCUIS7Y9suP9Jyp8&callback=initMap"></script>
-<style>
-    #map {
-        height: 400px;
-        width: 500px;
-    }
-</style>
+    {% include "partials/map_header.html" %}
 </head>
 
 <body>
@@ -33,6 +26,15 @@
     <p>Type: {{ camp.type }}</p>
     <p id="location">Location: {{ camp.location }}</p>
     <p>Attending: {{ camp.camped_join.count }}/{{ camp.attendee }}</p>
+    <p>Attendee's</p>
+    <ul>
+        {% for user in camp.camped_join.all %}
+        {% if user.id == camp.camped_event.id %}
+        {% else %}
+        <li>{{ user.first_name }} {{ user.last_name }}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
     <p>Date: {{camp.date }}</p>
     <p>Time: {{ camp.time }}</p>
     {% if user in camp.camped_join.all and camp.camped_event.id != request.session.userid %}

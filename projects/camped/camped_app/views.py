@@ -37,7 +37,8 @@ def host(request):
 def info(request, camp_id):
     context = {
         "user": User.objects.get(id=request.session['userid']),
-        "camp": Camp.objects.get(id=camp_id)
+        "camp": Camp.objects.get(id=camp_id),
+        "camps": Camp.objects.all()
     }
     return render(request, "info.html", context)
 
