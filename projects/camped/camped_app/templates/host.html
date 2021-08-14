@@ -3,12 +3,14 @@
 
 <head>
     {% include "partials/header.html" %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
     {% include "partials/navbar.html" %}
     {% if messages %}
-    <ul class="messages">
+    <ul class="messages" id="messages">
         {% for message in messages %}
         <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
         {% endfor %}

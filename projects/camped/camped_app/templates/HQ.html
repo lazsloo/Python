@@ -3,33 +3,35 @@
 
 <head>
     {% include "partials/header.html" %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
     {% include "partials/navbar.html" %}
+    <div class="text-center">
+    <h1>Welcome {{ user.first_name }}!</h1>
     {% if messages %}
-    <ul class="messages">
+    <ul class="messages" id="messages">
         {% for message in messages %}
         <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}
-    <h1>Welcome {{ user.first_name }}!</h1>
-    <h5>The date is {{ date }} Todays Camped event:</h5>
-    <table>
+</div>
+    <h3>The date is {{ date }} Todays Camped event:</h3>
+    <table class="table">
         <thead>
             <tr>
-                <th>Host:</th>
-                <th>Camped Name:</th>
-                <th>Type:</th>
-                <th>Location:</th>
-                <th>Attending:</th>
-                <th>Date:</th>
-                <th>Time:</th>
+                <th scope="col">Host:</th>
+                <th scope="col">Camped Name:</th>
+                <th scope="col">Type:</th>
+                <th scope="col">Location:</th>
+                <th scope="col">Attending:</th>
+                <th scope="col">Date:</th>
+                <th scope="col">Time:</th>
             </tr>
         </thead>
-    </table>
-    <table>
         <tbody>
             {% for camp in camp %}
             {% if user in camp.camped_join.all and date == camp.date|date:"Y/m/d" %}
@@ -37,7 +39,7 @@
                 {% if camp.camped_event.id == request.session.userid %}
                 <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
                 {% else %}
-                <th><a href="/profile/{{ camps.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
+                <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
                 {% endif %}
                 <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
                 <th>{{ camp.type }}</th>
@@ -51,30 +53,28 @@
             {% endfor %}
         </tbody>
     </table>
-    <h5>Upcoming Camped events</h5>
-    <table>
+    <h3>Upcoming Camped events</h3>
+    <table class="table">
         <thead>
             <tr>
-                <th>Host:</th>
-                <th>Camped Name:</th>
-                <th>Type:</th>
-                <th>Location:</th>
-                <th>Attending:</th>
-                <th>Date:</th>
-                <th>Time:</th>
-                <th>Action:</th>
+                <th scope="col">Host:</th>
+                <th scope="col">Camped Name:</th>
+                <th scope="col">Type:</th>
+                <th scope="col">Location:</th>
+                <th scope="col">Attending:</th>
+                <th scope="col">Date:</th>
+                <th scope="col">Time:</th>
+                <th scope="col">Action:</th>
             </tr>
         </thead>
-    </table>
-    <table>
         <tbody>
-            {% for camp in camp %}
-            {% if user in camp.camped_join.all and date < camp.date|date:"Y/m/d" %}
             <tr>
-                {% if camp.camped_event.id == request.session.userid %}
+                {% for camp in camp %}
+                {% if user in camp.camped_join.all and date < camp.date|date:"Y/m/d" %} 
+                {% if camp.camped_event.id == request.session.userid %} 
                 <th>{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</th>
                 {% else %}
-                <th><a href="/profile/{{ camps.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
+                <th><a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></th>
                 {% endif %}
                 <th><a href="/camped/{{ camp.id }}">{{ camp.title }}</a></th>
                 <th>{{ camp.type }}</th>
@@ -93,7 +93,6 @@
             {% endfor %}
         </tbody>
     </table>
-    {% include "partials/footer.html" %}
 </body>
 
 </html>

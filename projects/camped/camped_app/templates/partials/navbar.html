@@ -1,7 +1,19 @@
-<ul>
-    <li><a href="/logout">Logout</a></li>
-    <li><a href="/HQ">Home</a></li>
-    <li><a href="/host">Host</a></li>
-    <li><a href="/camped">Camped</a></li>
-    <li><a href="/profile/{{ request.session.userid }}">Profile</a></li>
-</ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/HQ">Camped</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/profile/{{ request.session.userid }}" class="nav-link">Profile</a>
+                <li class="nav-item">
+                    <a href="/HQ" class="nav-link">Home</a>
+                <li class="nav-item">
+                    <a href="/host" class="nav-link">Host</a>
+                <li class="nav-item">
+                    <a href="/camped" class="nav-link">Camped</a>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">Logout</a>
+                </li>
+        </div>
+    </div>
+</nav>

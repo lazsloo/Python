@@ -71,7 +71,9 @@ def camped(request):
     return render(request, "camped.html", context)
 
 def profile(request, user_id):
+    now = datetime.now()
     context = {
+        "date": now.strftime("%Y/%m/%d"),
         "user": User.objects.get(id=user_id),
         "camp": Camp.objects.all()
     }
@@ -194,4 +196,3 @@ def update_user (request, user_id):
         update_user.save()
         messages.error(request, "User profile updated")
         return redirect(f"/profile/{user_id}")
-

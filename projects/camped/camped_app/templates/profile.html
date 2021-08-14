@@ -8,7 +8,7 @@
 <body>
     {% include "partials/navbar.html" %}
     {% if messages %}
-    <ul class="messages">
+    <ul class="messages" id="messages">
         {% for message in messages %}
         <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
         {% endfor %}
@@ -27,9 +27,24 @@
         <p>Confirm Password: <input name="confirm_pw" type="password"></p>
         <button type="submit">Update</button>
     </form>
+    <h5>Past Camped events:</h5>
+    {% for camp in camp %}
+    {% if user in camp.camped_join.all and date > camp.date|date:"Y/m/d" %}
+    <ul>
+        <li>{{ camp.title }}</li>
+    </ul>
+    {% endif %}
+    {% endfor %}
     {% else %}
     <p>Name: {{ user.first_name }} {{user.last_name }}</p>
     <p>E-mail: {{ user.email }}</p>
+    {% for camp in camp %}
+    {% if user in camp.camped_join.all and date > camp.date|date:"Y/m/d" %}
+    <ul>
+        <li>{{ camp.title }}</li>
+    </ul>
+    {% endif %}
+    {% endfor %}
     {% endif %}
     {% include "partials/footer.html" %}
 </body>
