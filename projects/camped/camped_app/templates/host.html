@@ -9,33 +9,51 @@
 
 <body>
     {% include "partials/navbar.html" %}
-    {% if messages %}
-    <ul class="messages" id="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <h1>Create Camped!</h1>
-    <form action="/create" method="POST">
+    <h1 class="text-center">Create Camped!</h1>
+    <div class="text-center">
+        {% if messages %}
+        <ul class="messages" id="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <form action="/create" style="max-width: 350px;margin: auto;" method="POST">
         {% csrf_token %}
-        <p>Camped Name: <input name="title" type="text"></p>
-        <p>Type: <select name="type">
+        <label for="title">Camped Name:</label>
+        <input name="title" type="text" class="form-control">
+        <label for="type">Type:</label>
+        <br>
+        <div class="text-center">
+            <select name="type">
                 {% for i in z %}
                 <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}
-            </select></p>
-        <p>Location: <input name="location" type="text"></p>
-        <p>Attendees: <select name="attendee">
+            </select>
+        </div>
+        </br>
+        <label for="location">Location:</label>
+        <input name="location" type="text" class="form-control">
+        <label for="attendee">Attending:</label>
+        <br>
+        <div class="text-center">
+            <select name="attendee">
                 {% for i in x %}
                 <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}
-            </select></p>
-        <p>Date: <input name="date" type="date" required></p>
-        <p>Time: <input name="time" type="time" required></p>
-        <button type="submit">Submit</button>
+            </select>
+        </div>
+        <br>
+        <label for="date">Date:</label>
+        <input name="date" type="date" class="form-control text-center" required>
+        <label for="time">Time:</label>
+        <input name="time" type="time" class="form-control text-center" required>
+        <div class="text-center mt-3">
+            <button class="btn btn-sm btn-primary" type="submit">Host</button>
+        </div>
     </form>
-    <a href="/HQ"><button>Back</button></a>
+    </div>
     {% include "partials/footer.html" %}
 </body>
 

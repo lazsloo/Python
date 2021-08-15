@@ -3,50 +3,75 @@
 
 <head>
     {% include "partials/header.html" %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
     {% include "partials/navbar.html" %}
-    {% if messages %}
-    <ul class="messages" id="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <h1>{{ user.first_name }} Profile</h1>
-    {% if user.id == request.session.userid %}
-    <h5>Update Profile</h5>
-    {% csrf_token %}
-    <form action="/update_user/{{ user.id }}" method="POST">
-        {% csrf_token %}
-        <p>First Name: <input name="first_name" value="{{ user.first_name }}" type="text"></p>
-        <p>Last Name: <input name="last_name" value="{{ user.last_name }}" type="text"></p>
-        <p>E-mail: <input name="email" value="{{ user.email }}" type="email"></p>
-        <p>Password: <input name="password" type="password"></p>
-        <p>Confirm Password: <input name="confirm_pw" type="password"></p>
-        <button type="submit">Update</button>
-    </form>
-    <h5>Past Camped events:</h5>
-    {% for camp in camp %}
-    {% if user in camp.camped_join.all and date > camp.date|date:"Y/m/d" %}
-    <ul>
-        <li>{{ camp.title }}</li>
-    </ul>
-    {% endif %}
-    {% endfor %}
-    {% else %}
-    <p>Name: {{ user.first_name }} {{user.last_name }}</p>
-    <p>E-mail: {{ user.email }}</p>
-    {% for camp in camp %}
-    {% if user in camp.camped_join.all and date > camp.date|date:"Y/m/d" %}
-    <ul>
-        <li>{{ camp.title }}</li>
-    </ul>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% include "partials/footer.html" %}
+    <div class="text-center">
+        <h1>{{ user.first_name }} Profile</h1>
+        {% if user.id == request.session.userid %}
+        <h5>Update Profile</h5>
+        {% if messages %}
+        <ul class="messages" id="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div class="container" style="max-width: 860px;">
+        <div class="row mt-5">
+            <div class="col-md-5 me-5">
+                <form action="/update_user/{{ user.id }}" method="POST">
+                    {% csrf_token %}
+                    <label for="first_name">First Name:</label>
+                    <input name="first_name" value="{{ user.first_name }}" type="text" class="form-control">
+                    <label for="last_name">Last Name:</label>
+                    <input name="last_name" value="{{ user.last_name }}" type="text" class="form-control">
+                    <label for="email_name">E-mail:</label>
+                    <input name="email" value="{{ user.email }}" type="email" class="form-control">
+                    <label for="password">Password:</label>
+                    <input name="password" type="password" class="form-control">
+                    <label for="confirm_pw">Confirm Password:</label>
+                    <input name="confirm_pw" type="password" class="form-control">
+                    <button type="submit" class="btn btn-sm btn-warning mt-3">Update</button>
+                </form>
+            </div>
+            <div class="col-md-5 ms-5">
+                <h5>Past Camped events:</h5>
+                {% for camp in camp %}
+                {% if user in camp.camped_join.all and date > camp.date|date:"Y/m/d" %}
+                <ul>
+                    <li>{{ camp.title }}</li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+            </div>
+        </div>
+    </div>
+    <div class="container" style="max-width: 860px;">
+        <div class="row mt-5">
+            <div class="col-md-5 me-5">
+                <p>Name: {{ user.first_name }} {{user.last_name }}</p>
+                <p>E-mail: {{ user.email }}</p>
+            </div>
+            <div class="col-md-5 me-5">
+                <h5>Past Camped events:</h5>
+                {% for camp in camp %}
+                {% if user in camp.camped_join.all and date > camp.date|date:"Y/m/d" %}
+                <ul>
+                    <li>{{ camp.title }}</li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% include "partials/footer.html" %}
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

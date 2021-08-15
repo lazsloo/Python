@@ -143,7 +143,7 @@ def join(request, camp_id):
     user = User.objects.get(id=request.session['userid'])
     joined.camped_join.add(user)
     messages.error(request, "Joined Camped event")
-    return redirect('/HQ')
+    return redirect('/camped')
 
 def leave(request, camp_id):
     leave = Camp.objects.get(id=camp_id)

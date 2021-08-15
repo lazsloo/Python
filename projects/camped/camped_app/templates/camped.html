@@ -3,13 +3,26 @@
 
 <head>
     {% include "partials/header.html" %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
     {% include "partials/navbar.html" %}
+    <div class="text-center">
     <h1>Camped Events</h1>
-    <h5>Todays Camped event for {{ date }} join while you still can:</h5>
-    <table>
+    <div class="text-center">
+        {% if messages %}
+        <ul class="messages" id="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <h3 class="mt-5">Todays Camped event for {{ date }} join while you still can:</h3>
+    </div>
+    <table class="table" style="max-width: 1500px;margin: auto;">
         <thead>
             <tr>
                 <th>Host:</th>
@@ -22,8 +35,6 @@
                 <th>Action:</th>
             </tr>
         </thead>
-    </table>
-    <table>
         <tbody>
             {% for camp in camp %}
             {% if date == camp.date|date:"Y/m/d" %}
@@ -54,8 +65,8 @@
             {% endfor %}
         </tbody>
     </table>
-    <h4>All Camped Events:</h4>
-    <table>
+    <h3 class="text-center mt-5">All Camped Events:</h3>
+    <table class="table" style="max-width: 1500px;margin: auto;">
         <thead>
             <tr>
                 <th>Host:</th>
@@ -65,10 +76,9 @@
                 <th>Attending:</th>
                 <th>Date:</th>
                 <th>Time:</th>
+                <th>Action:</th>
             </tr>
         </thead>
-    </table>
-    <table>
         <tbody>
             {% for camp in camp reversed %}
             {% if date < camp.date|date:"Y/m/d" %}
@@ -101,5 +111,5 @@
     </table>
     {% include "partials/footer.html" %}
 </body>
-<!--  -->
+
 </html>

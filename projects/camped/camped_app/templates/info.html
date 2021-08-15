@@ -10,50 +10,58 @@
 
 <body>
     {% include "partials/navbar.html" %}
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <h1>Camped Event</h1>
-    {% if camp.camped_event.id == request.session.userid %}
-    <p>Host: {{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</p>
-    </p>
-    {% else %}
-    <p>Host: <a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a>
-    {% endif %}
-    <p>Camped Name: {{ camp.title }}</p>
-    <p>Type: {{ camp.type }}</p>
-    <p id="location">Location: {{ camp.location }}</p>
-    <p>Attending: {{ camp.camped_join.count }}/{{ camp.attendee }}</p>
-    <p>Attendee's</p>
-    <ul>
-        {% for user in camp.camped_join.all %}
-        {% if user.id == camp.camped_event.id %}
-        {% else %}
-        <li>{{ user.first_name }} {{ user.last_name }}</li>
+    <div class="text-center">
+        <h1>Camped Event</h1>
+        {% if messages %}
+        <ul class="messages" id="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
         {% endif %}
-        {% endfor %}
-    </ul>
-    <p>Date: {{camp.date }}</p>
-    <p>Time: {{ camp.time }}</p>
-    {% if user in camp.camped_join.all and camp.camped_event.id != request.session.userid %}
-    <a href="/HQ/{{ camp.id }}/leave"><button>Leave</button></a>
-    {% else %}
-    {% endif %}
-    {% if user.id == camp.camped_event.id %}
-    <a href="/camped/{{ camp.id }}/edit"><button>Edit</button></a>
-    <a href="/HQ"><button>Home</button></a>
-    <a href="/camped"><button>Camped</button></a>
-    <a href="/delete/{{ camp.id }}"><button>Delete</button></a>
-    {% else %}
-    <a href="/HQ"><button>Home</button></a>
-    <a href="/camped"><button>Camped</button></a>
-    {% endif %}
-    <div id="map"></div>
-    {% include "partials/map.html" %}
+    </div>
+    <div class="container" style="max-width: 860px;">
+        <div class="row mt-5">
+            <div class="col-md-5">
+                {% if camp.camped_event.id == request.session.userid %}
+                <p>Host: {{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</p>
+                {% else %}
+                <p>Host: <a href="/profile/{{ camp.camped_event.id }}">{{ camp.camped_event.first_name }} {{ camp.camped_event.last_name }}</a></p>
+                {% endif %}
+                <p>Camped Name: {{ camp.title }}</p>
+                <p>Type: {{ camp.type }}</p>
+                <p id="location">Location: {{ camp.location }}</p>
+                <p>Attending: {{ camp.camped_join.count }}/{{ camp.attendee }}</p>
+                <p>Attendees</p>
+                <ul>
+                    {% for user in camp.camped_join.all %}
+                    {% if user.id == camp.camped_event.id %}
+                    {% else %}
+                    <li>{{ user.first_name }} {{ user.last_name }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <p>Date: {{camp.date }}</p>
+                <p>Time: {{ camp.time }}</p>
+                {% if user in camp.camped_join.all and camp.camped_event.id != request.session.userid %}
+                <a href="/HQ/{{ camp.id }}/leave"><button class="btn btn-sm btn-danger">Leave</button></a>
+                {% else %}
+                {% endif %}
+                {% if user.id == camp.camped_event.id %}
+                <a href="/camped/{{ camp.id }}/edit"><button class="btn btn-sm btn-warning">Edit</button></a>
+                <a href="/HQ"><button class="btn btn-sm btn-primary">Home</button></a>
+                <a href="/camped"><button class="btn btn-sm btn-primary">Camped</button></a>
+                <a href="/delete/{{ camp.id }}"><button class="btn btn-sm btn-danger">Delete</button></a>
+                {% else %}
+                <a href="/HQ"><button class="btn btn-sm btn-primary">Home</button></a>
+                <a href="/camped"><button class="btn btn-sm btn-primary">Camped</button></a>
+                {% endif %}
+            </div>
+            <div class="col-md-5 ms-5">
+                {% include "partials/map.html" %}
+            </div>
+        </div>
+    </div>
     {% include "partials/footer.html" %}
 </body>
 
