@@ -43,9 +43,13 @@
                 </ul>
                 <p>Date: {{camp.date }}</p>
                 <p>Time: {{ camp.time }}</p>
-                {% if user in camp.camped_join.all and camp.camped_event.id != request.session.userid %}
+                {% if camp.camped_event.id == request.session.userid %}
+                {% elif user in camp.camped_join.all and camp.camped_event.id != request.session.userid %}
                 <a href="/HQ/{{ camp.id }}/leave"><button class="btn btn-sm btn-danger">Leave</button></a>
+                {% elif camp.camped_join.count == camp.attendee %}
+                <button class="btn btn-sm btn-secondary" disabled>Full </button>
                 {% else %}
+                <a href="/HQ/{{ camp.id }}/join"><button class="btn btn-sm btn-success">Join</button></a>
                 {% endif %}
                 {% if user.id == camp.camped_event.id %}
                 <a href="/camped/{{ camp.id }}/edit"><button class="btn btn-sm btn-warning">Edit</button></a>
