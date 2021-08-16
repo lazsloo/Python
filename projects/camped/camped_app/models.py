@@ -65,7 +65,7 @@ class CampManager(models.Manager):
 
         if len(post_data['location']) < 1:
             errors['location'] = "Must enter a location"
-        
+
         if datetime.strptime(post_data['date'], '%Y-%m-%d') <= datetime.now():
             errors['date'] = 'Cannot do past dates'
 
